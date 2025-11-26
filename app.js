@@ -16,6 +16,7 @@ const server = http.createServer(app);
 const ACCEPTED_ORIGINS = [
   "http://localhost:5173",
   "http://localhost:5174",
+  "http://localhost:5175",
   "http://localhost:3000",
   "http://195.200.0.39", // Tu IP
 ];
