@@ -17,8 +17,10 @@ const ACCEPTED_ORIGINS = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
+  "http://localhost:5176",
   "http://localhost:3000",
   "http://195.200.0.39", // Tu IP
+  "http://2.24.97.132", 
 ];
 
 const corsOptions = {
