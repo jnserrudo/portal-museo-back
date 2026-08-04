@@ -5,6 +5,7 @@ export class EventoModel {
   static getAll = async () => {
     try {
       const eventos = await prisma.evento.findMany({
+        where: { deleted: false },
         orderBy: { fecha: 'desc' },
         include: { autor: true },
       });
@@ -17,8 +18,11 @@ export class EventoModel {
   static getById = async (id) => {
     if (isNaN(id)) return null;
     try {
-      const evento = await prisma.evento.findUnique({
-        where: { id },
+      const evento = await prisma.evento.findFirst({
+        where: { 
+          id,
+          deleted: false 
+        },
         include: { autor: true },
       });
       return evento;
@@ -71,8 +75,10 @@ export class EventoModel {
   static delete = async (id) => {
     if (isNaN(id)) return null;
     try {
-      const evento = await prisma.evento.delete({
+      // Borrado lógico: marcar como deleted en lugar de eliminar
+      const evento = await prisma.evento.update({
         where: { id },
+        data: { deleted: true },
       });
       return evento;
     } catch (error) {

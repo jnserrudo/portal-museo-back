@@ -189,7 +189,11 @@ export class EventoController {
       const { id } = req.params;
       const eventoEliminado = await EventoModel.delete(parseInt(id));
       if (eventoEliminado) {
-        res.status(204).send();
+        res.status(200).json({ 
+          success: true, 
+          message: "Evento eliminado correctamente",
+          data: eventoEliminado 
+        });
       } else {
         res.status(404).json({ message: "Evento no encontrado para eliminar" });
       }

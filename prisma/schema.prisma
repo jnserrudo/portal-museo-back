@@ -25,6 +25,7 @@ model Evento {
   lugar       String?
   imagenUrls  Json     @default("[]")
   publicado   Boolean  @default(false)
+  deleted     Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
