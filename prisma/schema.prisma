@@ -21,6 +21,7 @@ model Evento {
   titulo      String
   descripcion String   @db.Text
   fecha       DateTime
+  hora        String?
   lugar       String?
   imagenUrls  Json     @default("[]")
   publicado   Boolean  @default(false)

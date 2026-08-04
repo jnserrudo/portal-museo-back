@@ -44,7 +44,7 @@ export class EventoController {
         console.log('Archivos recibidos:', req.files ? req.files.length : 0);
         
         // Verificar campos requeridos
-        const { titulo, descripcion, fecha, lugar } = req.body;
+        const { titulo, descripcion, fecha, hora, lugar } = req.body;
         
         if (!titulo || !descripcion || !fecha) {
           return res.status(400).json({ 
@@ -66,6 +66,7 @@ export class EventoController {
           titulo: titulo.trim(),
           descripcion: descripcion.trim(),
           fecha: new Date(fecha),
+          hora: hora ? hora.trim() : null,
           lugar: lugar ? lugar.trim() : null,
           imagenUrls,
           publicado: req.body.publicado === 'true',
@@ -111,7 +112,7 @@ export class EventoController {
         console.log('Archivos recibidos:', req.files ? req.files.length : 0);
         
         // Verificar campos requeridos
-        const { titulo, descripcion, fecha } = req.body;
+        const { titulo, descripcion, fecha, hora } = req.body;
         
         if (!titulo || !descripcion || !fecha) {
           return res.status(400).json({ 
@@ -149,6 +150,7 @@ export class EventoController {
           titulo: titulo.trim(),
           descripcion: descripcion.trim(),
           fecha: new Date(fecha),
+          hora: hora ? hora.trim() : null,
           lugar: req.body.lugar ? req.body.lugar.trim() : null,
           publicado: req.body.publicado === 'true',
           autorId: parseInt(req.body.autorId) || 1 // temporal
