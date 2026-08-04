@@ -6,6 +6,12 @@ export class EventoController {
   static getAll = async (req, res, next) => {
     try {
       const eventos = await EventoModel.getAll();
+      // Headers para evitar caché
+      res.set({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      });
       res.json(eventos);
     } catch (error) {
       next(error);
