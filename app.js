@@ -40,7 +40,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // --- Middleware ---
-app.use(express.json());
+// Aumentar límite de tamaño para JSON y URL-encoded (para imágenes grandes)
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Servir archivos estáticos desde la carpeta 'src/uploads'
 import path from 'path';
@@ -101,3 +103,4 @@ server.listen(PORT, "localhost", () => {
     `✅ API del Portal del Museo corriendo en http://localhost:${PORT}`
   );
 });
+
