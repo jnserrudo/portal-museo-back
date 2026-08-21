@@ -26,13 +26,19 @@ const ACCEPTED_ORIGINS = [
 const corsOptions = {
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
+    
+    // Permitir todos los puertos localhost en desarrollo
+    if (origin && origin.startsWith('http://localhost:')) {
+      return callback(null, true);
+    }
+    
     if (ACCEPTED_ORIGINS.includes(origin)) {
       return callback(null, true);
     }
     return callback(new Error("No permitido por CORS"), false);
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization", "cache-control", "pragma", "expires", "if-modified-since"],
   credentials: true,
   optionsSuccessStatus: 200,
 };

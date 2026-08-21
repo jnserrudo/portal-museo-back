@@ -9,26 +9,27 @@ datasource db {
 
 model Usuario {
   id        Int      @id @default(autoincrement())
-  rol       String   @default("usuario") // "admin", "usuario"
-  password  String   // ← siempre hasheada con bcrypt
+  rol       String   @default("usuario")
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   eventos   Evento[]
 }
+
 model Evento {
   id          Int      @id @default(autoincrement())
   titulo      String
   descripcion String   @db.Text
   fecha       DateTime
-  hora        String?
   lugar       String?
-  imagenUrls  Json     @default("[]")
+  imagenUrls  Json
   publicado   Boolean  @default(false)
-  deleted     Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
   autorId     Int
+  hora        String?
+  deleted     Boolean  @default(false)
   autor       Usuario  @relation(fields: [autorId], references: [id])
+
+  @@index([autorId], map: "Evento_autorId_fkey")
 }
